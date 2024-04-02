@@ -1,13 +1,18 @@
-const NavBar = ({ pokemonList, onPokemonClick }) => {
-  return (
-    <div className="nav-bar">
-      {pokemonList.map((pokemon, index) => (
-        <button key={index} onClick={() => onPokemonClick(index)}>
-          {pokemon.name}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-export default NavBar;
+const NavBar = ({ pokemonList, onPokemonSelection }) => {
+    return (
+      <nav className="navbar">
+        <ul>
+          {pokemonList.map((pokemon, index) => (
+            <li key={index}>
+              <button onClick={() => onPokemonSelection(pokemon.name)}>
+                {pokemon.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  };
+  
+  export default NavBar;
+  
