@@ -1,21 +1,57 @@
-import MyTitle from "./components/MyTitle"
-import PokemonCard from './components/PokemonCard'
+// import MyTitle from "./components/MyTitle"
+// import PokemonCard from './components/PokemonCard'
+import { useState } from 'react';
+
+const pokemonList = [
+  {
+    name: "bulbasaur",
+    imgSrc: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+  },
+  {
+    name: "charmander",
+    imgSrc: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+  },
+  {
+    name: "squirtle",
+    imgSrc: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+  },
+  {
+    name: "pikachu",
+    imgSrc: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+  },
+  {
+    name: "mew",
+  },
+];
 
 const App = () => {
-  const pokemonList = [
-    {
-      name: "bulbasaur",
-      imgSrc: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-    },
-    {
-      name: "mew",
-      imgSrc: "",
-    },
-  ];
+  const [pokemonIndex, setPokemonIndex] = useState(0);
+
+  const handlePrevious = () => {
+    if (pokemonIndex > 0) {
+      setPokemonIndex(pokemonIndex - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (pokemonIndex < pokemonList.length - 1) {
+      setPokemonIndex(pokemonIndex + 1);
+    }
+  };
 
   return (
     <div>
-      <PokemonCard pokemon={pokemonList[0]} />
+      <h1>Pokémon</h1>
+      <button onClick={handlePrevious} disabled={pokemonIndex === 0}>Précédent</button>
+      <button onClick={handleNext} disabled={pokemonIndex === pokemonList.length - 1}>Suivant</button>
+      <div>
+        <h2>{pokemonList[pokemonIndex].name}</h2>
+        {pokemonList[pokemonIndex].imgSrc ? (
+          <img src={pokemonList[pokemonIndex].imgSrc} alt={pokemonList[pokemonIndex].name} />
+        ) : (
+          <p>???</p>
+        )}
+      </div>
     </div>
   );
 };
